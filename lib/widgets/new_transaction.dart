@@ -49,62 +49,69 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-          TextField(
-            decoration: const InputDecoration(
-              labelText: "Title",
-            ),
-            controller: _titleController,
-            onSubmitted: (_) => _submitData(),
-            // onChanged: (val) => titleInput = val,
+    return SingleChildScrollView(
+      child: Card(
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
           ),
-          TextField(
-            decoration: const InputDecoration(
-              labelText: "Amount",
+          child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+            TextField(
+              decoration: const InputDecoration(
+                labelText: "Title",
+              ),
+              controller: _titleController,
+              onSubmitted: (_) => _submitData(),
+              // onChanged: (val) => titleInput = val,
             ),
-            controller: _amountController,
-            keyboardType: TextInputType.number,
-            onSubmitted: (_) => _submitData(),
-            // onChanged: (val) => amountInput = val,
-          ),
-          Container(
-            height: 70,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    _selectedDate == null
-                        ? "No Date Chosen!"
-                        : "Picked Date: ${DateFormat.yMd().format(_selectedDate!)}",
+            TextField(
+              decoration: const InputDecoration(
+                labelText: "Amount",
+              ),
+              controller: _amountController,
+              keyboardType: TextInputType.number,
+              onSubmitted: (_) => _submitData(),
+              // onChanged: (val) => amountInput = val,
+            ),
+            Container(
+              height: 70,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      _selectedDate == null
+                          ? "No Date Chosen!"
+                          : "Picked Date: ${DateFormat.yMd().format(_selectedDate!)}",
+                    ),
                   ),
-                ),
-                TextButton(
-                  onPressed: _presentDatePicker,
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(
-                          Theme.of(context).primaryColor)),
-                  child: Text(
-                    "Choose Date",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  TextButton(
+                    onPressed: _presentDatePicker,
+                    style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all(
+                            Theme.of(context).primaryColor)),
+                    child: Text(
+                      "Choose Date",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: _submitData,
-            style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(Theme.of(context).primaryColor),
-                foregroundColor: MaterialStateProperty.all(
-                  Theme.of(context).buttonTheme.colorScheme!.secondary,
-                )),
-            child: const Text("Add transaction"),
-          )
-        ]),
+            ElevatedButton(
+              onPressed: _submitData,
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(Theme.of(context).primaryColor),
+                  foregroundColor: MaterialStateProperty.all(
+                    Theme.of(context).buttonTheme.colorScheme!.secondary,
+                  )),
+              child: const Text("Add transaction"),
+            )
+          ]),
+        ),
       ),
     );
   }
